@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text('QR Reader'),
+        title: Center(child: Text('Historial')),
         actions: [
           Icon(Icons.delete_forever),
         ],
