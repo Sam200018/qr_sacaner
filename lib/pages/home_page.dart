@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:qr_reader/pages/direciones_page.dart';
+import 'package:qr_reader/pages/map_page.dart';
+import 'package:qr_reader/providers/ui_provider.dart';
+
 import 'package:qr_reader/widgets/custom_navigatorbar.dart';
 import 'package:qr_reader/widgets/scan_button.dart';
 
@@ -15,12 +21,30 @@ class HomePage extends StatelessWidget {
           Icon(Icons.delete_forever),
         ],
       ),
-      body: Center(
-        child: Text('Home page hi!'),
-      ),
+      body: _HomePageBody(),
       bottomNavigationBar: CustomNavigationBar(),
       floatingActionButton: ScanButtom(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
+  }
+}
+
+class _HomePageBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    //obtener el selectedManuOpt que ya exxite en nuestro árbol de widgtes
+    final uiProvider = Provider.of<UiProvider>(context);
+
+    final currentIndex = uiProvider.selectedMenuOpt;
+
+    switch (currentIndex) {
+      case 0:
+        return MapsPage();
+        break;
+      case 1:
+        return DireccionesPage();
+      default:
+        return MapsPage();
+    }
   }
 }

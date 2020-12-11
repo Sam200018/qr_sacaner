@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class MapPage extends StatelessWidget {
-  const MapPage({Key key}) : super(key: key);
+class DireccionesPage extends StatelessWidget {
+  const DireccionesPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text('Map!!'),
+        child: Text('Direcciones!!'),
       ),
     );
   }
