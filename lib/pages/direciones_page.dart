@@ -6,8 +6,8 @@ class DireccionesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
-        child: Text('Direcciones!!'),
+      child: Column(
+        children: [Text('Amanda'), Text('Sabino')],
       ),
     );
   }
