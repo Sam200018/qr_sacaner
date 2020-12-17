@@ -42,7 +42,7 @@ class DBProvider {
     final type = nuevoScan.type;
     final value = nuevoScan.value;
 
-    //verificar
+    //Inserta en la base de datos
     final db = await databases;
     final res = await db
         .rawInsert('INSERT INTO Scans(id,type,value) VALUES($id,$type,$value)');
@@ -50,6 +50,7 @@ class DBProvider {
     return res;
   }
 
+  //inserta en la base de datos pero de otra manera
   Future<int> nuevoScan(ScanModel nuevoScan) async {
     final db = await databases;
     final res = await db.insert('Scans', nuevoScan.toJson());
@@ -57,6 +58,7 @@ class DBProvider {
     return res;
   }
 
+  //obtenemos el scan por si id
   Future<ScanModel> getScanById(int id) async {
     final db = await databases;
     final res = await db.query(
@@ -68,6 +70,7 @@ class DBProvider {
     return res.isNotEmpty ? ScanModel.fromJson(res.first) : null;
   }
 
+  //Se obtiene todos los registros de la base de datos
   Future<List<ScanModel>> getAllScans() async {
     final db = await databases;
     final res = await db.query('Scans');
@@ -75,6 +78,7 @@ class DBProvider {
     return res.isNotEmpty ? res.map((e) => ScanModel.fromJson(e)).toList() : [];
   }
 
+  //Se obtienen todos los registro de la base de datos que sean del mismo tipo
   Future<List<ScanModel>> getScansByType(String type) async {
     final db = await databases;
     final res = await db.query('Scans', where: 'type= $type');
@@ -82,10 +86,27 @@ class DBProvider {
     return res.isNotEmpty ? res.map((e) => ScanModel.fromJson(e)).toList() : [];
   }
 
+  //update
   Future<int> updateScan(ScanModel newScan) async {
     final db = await databases;
     final res = await db.update('Scans', newScan.toJson(),
         where: 'id= ?', whereArgs: [newScan.id]);
+
+    return res;
+  }
+
+  //delete everything
+  Future<int> deleteAllScans() async {
+    final db = await databases;
+    final res = await db.delete('Scans');
+
+    return res;
+  }
+
+  //delete by id
+  Future<int> deleteScan(int id) async {
+    final db = await databases;
+    final res = await db.delete('Scans', where: 'id =?', whereArgs: [id]);
 
     return res;
   }
