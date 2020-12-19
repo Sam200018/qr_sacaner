@@ -83,7 +83,11 @@ class DBProvider {
   //Se obtienen todos los registro de la base de datos que sean del mismo tipo
   Future<List<ScanModel>> getScansByType(String type) async {
     final db = await databases;
-    final res = await db.query('Scans', where: 'type= $type');
+    final res = await db.query(
+      'Scans',
+      where: 'type= ?',
+      whereArgs: [type],
+    );
 
     return res.isNotEmpty ? res.map((e) => ScanModel.fromJson(e)).toList() : [];
   }

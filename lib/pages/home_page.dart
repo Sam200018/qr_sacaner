@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:qr_reader/pages/direciones_page.dart';
 
 import 'package:qr_reader/pages/maps_page.dart';
+import 'package:qr_reader/providers/scan_list_provider.dart';
 
 import 'package:qr_reader/providers/ui_provider.dart';
 
@@ -38,12 +39,16 @@ class _HomePageBody extends StatelessWidget {
     final uiProvider = Provider.of<UiProvider>(context);
 
     final currentIndex = uiProvider.selectedMenuOpt;
-
+    //Usar el scanListProvider, y samos false para no redibujar la variable final sino lo que queremos que se redibuje son los page
+    final scanListProvider =
+        Provider.of<ScanListProvider>(context, listen: false);
     switch (currentIndex) {
       case 0:
+        scanListProvider.loadScansByType('geo');
         return MapPage();
         break;
       case 1:
+        scanListProvider.loadScansByType('http');
         return DireccionesPage();
       default:
         return MapPage();
