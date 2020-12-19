@@ -13,6 +13,13 @@ class MapPage extends StatelessWidget {
       itemCount: scans.length,
       itemBuilder: (_, i) => Dismissible(
         key: UniqueKey(),
+        background: Container(
+          color: Colors.redAccent,
+        ),
+        onDismissed: (DismissDirection direction) {
+          Provider.of<ScanListProvider>(context, listen: false)
+              .deleteById(scans[i].id);
+        },
         child: ListTile(
           leading: Icon(
             Icons.map,

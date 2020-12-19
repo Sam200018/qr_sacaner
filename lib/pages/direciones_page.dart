@@ -11,18 +11,28 @@ class DireccionesPage extends StatelessWidget {
     final scans = scanListProvider.scans;
     return ListView.builder(
       itemCount: scans.length,
-      itemBuilder: (_, i) => ListTile(
-        leading: Icon(
-          Icons.web,
-          color: Theme.of(context).primaryColor,
+      itemBuilder: (_, i) => Dismissible(
+        key: UniqueKey(),
+        background: Container(
+          color: Colors.redAccent,
         ),
-        title: Text(scans[i].value),
-        subtitle: Text(scans[i].id.toString()),
-        trailing: Icon(
-          Icons.keyboard_arrow_right,
-          color: Colors.grey,
+        onDismissed: (DismissDirection direction) {
+          Provider.of<ScanListProvider>(context, listen: false)
+              .deleteById(scans[i].id);
+        },
+        child: ListTile(
+          leading: Icon(
+            Icons.web,
+            color: Theme.of(context).primaryColor,
+          ),
+          title: Text(scans[i].value),
+          subtitle: Text(scans[i].id.toString()),
+          trailing: Icon(
+            Icons.keyboard_arrow_right,
+            color: Colors.grey,
+          ),
+          onTap: () => print(scans[i].id),
         ),
-        onTap: () => print(scans[i].id),
       ),
     );
   }

@@ -40,6 +40,5 @@ class ScanListProvider extends ChangeNotifier {
 
   deleteById(int id) async {
     await DBProvider.db.deleteScan(id);
-    this.cargarScans();
   }
 }
