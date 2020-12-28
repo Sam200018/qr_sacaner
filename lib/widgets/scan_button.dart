@@ -16,7 +16,7 @@ class ScanButtom extends StatelessWidget {
         //     '#3D8BEF', 'Cancel', false, ScanMode.QR);
 
         // final barcodeScanRes = 'http://google.com';
-        final barcodeScanRes = 'geo:25.672124, -100.305782';
+        final barcodeScanRes = 'geo:19.446727,-99.151282';
 
         if (barcodeScanRes == '-1') {
           return;
